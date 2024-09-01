@@ -19,7 +19,7 @@
       <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
       <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
     </ul>
-    <h3>Ecosystem</h3>
+    <h3>Ecosystem222</h3>
     <ul>
       <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
       <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
@@ -27,15 +27,38 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+    {{ data }}
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
-  }
+  },
+  mounted() {
+    //페이지 시작시 자동 함수 실행
+    this.fetchData();
+  },
+  data() {
+    return {
+      data: "",
+    };
+  },
+  methods: {
+    fetchData() {
+      axios
+          .get("http://localhost:8081/api/hello")
+          .then((response) => {
+            this.data = response.data;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+    },
+  },
 }
 </script>
 
